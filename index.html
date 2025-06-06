@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limitless Canvas - App Development Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        /* Neo-brutalism theme */
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #f0f0f0;
+        }
+        .neobrutalism {
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0px #000;
+            transition: all 0.2s ease;
+        }
+        .neobrutalism:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #000;
+        }
+        .feature-card {
+            background: #fff;
+            padding: 2rem;
+            margin: 1rem;
+        }
+        .pricing-card {
+            background: #ffeb3b;
+        }
+        .contact-form input, .contact-form textarea {
+            border: 2px solid #000;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="bg-yellow-300 p-8 neobrutalism m-4">
+        <h1 class="text-5xl font-bold mb-4">Limitless Canvas</h1>
+        <p class="text-xl">Draw, speak, and code to bring your app ideas to life, including e-commerce solutions 🎨🗣️💻🛍️</p>
+    </header>
+
+    <!-- Input Options Section -->
+    <section class="p-4 my-8">
+        <div class="neobrutalism bg-white p-6 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">Create Your App</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <!-- Write Option -->
+                <div class="input-option neobrutalism p-4 bg-pink-100 cursor-pointer" data-type="write">
+                    <i class="bi bi-pencil text-4xl"></i>
+                    <h3 class="font-bold mt-2">Write</h3>
+                    <p>Type your app description</p>
+                </div>
+                
+                <!-- Speak Option -->
+                <div class="input-option neobrutalism p-4 bg-blue-100 cursor-pointer" data-type="speak">
+                    <i class="bi bi-mic text-4xl"></i>
+                    <h3 class="font-bold mt-2">Speak</h3>
+                    <p>Voice your app idea</p>
+                </div>
+                
+                <!-- Draw Option -->
+                <div class="input-option neobrutalism p-4 bg-green-100 cursor-pointer" data-type="draw">
+                    <i class="bi bi-brush text-4xl"></i>
+                    <h3 class="font-bold mt-2">Draw</h3>
+                    <p>Sketch your app design</p>
+                </div>
+                
+                <!-- Code Option -->
+                <div class="input-option neobrutalism p-4 bg-purple-100 cursor-pointer" data-type="code">
+                    <i class="bi bi-code-slash text-4xl"></i>
+                    <h3 class="font-bold mt-2">Code</h3>
+                    <p>Write code directly</p>
+                </div>
+            </div>
+            
+            <!-- Input Areas (initially hidden) -->
+            <div id="inputAreas" class="mb-6">
+                <textarea id="writeInput" class="w-full neobrutalism p-4 mb-4 hidden" rows="6" placeholder="Describe your app idea..."></textarea>
+                <div id="speakInput" class="neobrutalism p-4 text-center hidden">
+                    <button id="startRecording" class="bg-blue-100 neobrutalism px-6 py-2 font-bold"><i class="bi bi-mic"></i> Start Recording</button>
+                    <p id="recordingStatus" class="mt-2">Click to start recording</p>
+                </div>
+                <canvas id="drawInput" class="w-full neobrutalism hidden" height="300"></canvas>
+                <textarea id="codeInput" class="w-full neobrutalism p-4 mb-4 hidden font-mono" rows="6" placeholder="Enter your code..."></textarea>
+            </div>
+            
+            <!-- Do Magic Button -->
+            <button id="doMagicBtn" class="w-full neobrutalism bg-yellow-300 px-6 py-3 font-bold text-xl disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                DO MAGIC ✨
+            </button>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="neobrutalism feature-card bg-pink-200">
+            <i class="bi bi-pencil-square text-4xl"></i>
+            <h3 class="text-xl font-bold mt-4">Draw Your App</h3>
+            <p>Sketch your UI and watch it come to life</p>
+        </div>
+        <div class="neobrutalism feature-card bg-blue-200">
+            <i class="bi bi-mic text-4xl"></i>
+            <h3 class="text-xl font-bold mt-4">Voice Commands</h3>
+            <p>Describe your app verbally and see it materialize</p>
+        </div>
+        <div class="neobrutalism feature-card bg-green-200">
+            <i class="bi bi-translate text-4xl"></i>
+            <h3 class="text-xl font-bold mt-4">Multilingual Support</h3>
+            <p>Develop in multiple languages</p>
+        </div>
+        <div class="neobrutalism feature-card bg-purple-200">
+            <i class="bi bi-shop text-4xl"></i>
+            <h3 class="text-xl font-bold mt-4">E-commerce Solutions</h3>
+            <p>Build powerful online stores with ease</p>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="p-4 my-8">
+        <h2 class="text-3xl font-bold mb-8 text-center">How It Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="neobrutalism p-4 bg-white">
+                <div class="text-4xl font-bold">1</div>
+                <h3 class="font-bold mt-2">Ideate</h3>
+                <p>Brainstorm your app idea</p>
+            </div>
+            <div class="neobrutalism p-4 bg-white">
+                <div class="text-4xl font-bold">2</div>
+                <h3 class="font-bold mt-2">Create</h3>
+                <p>Use our tools to design</p>
+            </div>
+            <div class="neobrutalism p-4 bg-white">
+                <div class="text-4xl font-bold">3</div>
+                <h3 class="font-bold mt-2">Refine</h3>
+                <p>Collaborate with AI</p>
+            </div>
+            <div class="neobrutalism p-4 bg-white">
+                <div class="text-4xl font-bold">4</div>
+                <h3 class="font-bold mt-2">Build</h3>
+                <p>Transform design into code</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="p-4 my-8">
+        <h2 class="text-3xl font-bold mb-8 text-center">Our Pricing</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- USD Pricing -->
+            <div class="neobrutalism pricing-card p-6">
+                <h3 class="text-2xl font-bold">🇺🇸 Standard Plan</h3>
+                <div class="text-3xl font-bold my-4">$18</div>
+                <ul class="list-disc ml-4">
+                    <li>200 Magics</li>
+                    <li>AI-Powered Development Tools</li>
+                    <li>Regular Updates</li>
+                </ul>
+            </div>
+            <div class="neobrutalism pricing-card p-6">
+                <h3 class="text-2xl font-bold">🇺🇸 Pro Plan</h3>
+                <div class="text-3xl font-bold my-4">$28</div>
+                <ul class="list-disc ml-4">
+                    <li>400 Magics</li>
+                    <li>30% Cost Reduction</li>
+                    <li>All Standard Features</li>
+                </ul>
+            </div>
+            <!-- INR Pricing -->
+            <div class="neobrutalism pricing-card p-6">
+                <h3 class="text-2xl font-bold">🇮🇳 Pro Plan</h3>
+                <div class="text-3xl font-bold my-4">₹1999</div>
+                <ul class="list-disc ml-4">
+                    <li>400 Magics</li>
+                    <li>30% Cost Reduction</li>
+                    <li>All Standard Features</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="p-4 my-8">
+        <div class="neobrutalism bg-white p-6 max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
+            <form class="contact-form" id="contactForm">
+                <input type="text" placeholder="Name" class="w-full neobrutalism mb-4" required>
+                <input type="email" placeholder="Email" class="w-full neobrutalism mb-4" required>
+                <input type="tel" placeholder="Phone" class="w-full neobrutalism mb-4" required>
+                <textarea placeholder="Message" class="w-full neobrutalism mb-4" rows="4" required></textarea>
+                <button type="submit" class="neobrutalism bg-yellow-300 px-6 py-2 font-bold">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Input Option Handling
+        const inputOptions = document.querySelectorAll('.input-option');
+        const inputAreas = document.getElementById('inputAreas');
+        const doMagicBtn = document.getElementById('doMagicBtn');
+        let currentInputType = null;
+        let isRecording = false;
+        
+        // Canvas Setup
+        const canvas = document.getElementById('drawInput');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        
+        // Initialize drawing canvas
+        function setupCanvas() {
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+        }
+        
+        // Drawing functions
+        function startDrawing(e) {
+            isDrawing = true;
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        }
+        
+        function draw(e) {
+            if (!isDrawing) return;
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        }
+        
+        function stopDrawing() {
+            isDrawing = false;
+            doMagicBtn.disabled = false;
+        }
+        
+        // Setup canvas events
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+        
+        // Input option click handling
+        inputOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Reset all options and hide all inputs
+                inputOptions.forEach(opt => opt.classList.remove('ring-4', 'ring-black'));
+                document.querySelectorAll('#inputAreas > *').forEach(input => input.classList.add('hidden'));
+                
+                // Highlight selected option
+                option.classList.add('ring-4', 'ring-black');
+                currentInputType = option.dataset.type;
+                
+                // Show corresponding input
+                const inputId = `${currentInputType}Input`;
+                document.getElementById(inputId).classList.remove('hidden');
+                
+                // Special handling for different input types
+                if (currentInputType === 'draw') {
+                    setupCanvas();
+                    doMagicBtn.disabled = true; // Enable after drawing
+                } else {
+                    doMagicBtn.disabled = false;
+                }
+            });
+        });
+        
+        // Speech Recognition Setup
+        const startRecordingBtn = document.getElementById('startRecording');
+        const recordingStatus = document.getElementById('recordingStatus');
+        
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            
+            startRecordingBtn.addEventListener('click', () => {
+                if (!isRecording) {
+                    recognition.start();
+                    isRecording = true;
+                    startRecordingBtn.innerHTML = '<i class="bi bi-stop-circle"></i> Stop Recording';
+                    recordingStatus.textContent = 'Recording... Speak now';
+                } else {
+                    recognition.stop();
+                    isRecording = false;
+                    startRecordingBtn.innerHTML = '<i class="bi bi-mic"></i> Start Recording';
+                    recordingStatus.textContent = 'Recording stopped';
+                }
+            });
+        }
+        
+        // Do Magic Button Click Handler
+        doMagicBtn.addEventListener('click', () => {
+            // Add your magic processing logic here
+            alert('Processing your ' + currentInputType + ' input... Magic coming soon! ✨');
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
